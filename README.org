@@ -1,0 +1,23 @@
+#+TITLE: IFW
+#+AUTHOR: Nikoshi
+
+* IFW - Simple File Watcher
+
+Simple file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable via [[https://github.com/sksamuel/hoplite][Hoplite]] / [[https://github.com/lightbend/config/blob/master/HOCON.md][HOCON]].
+
+** Building
+#+BEGIN_SRC
+./gradlew build
+#+END_SRC
+
+** Running
+#+BEGIN_SRC
+./gradlew run
+#+END_SRC
+
+** Creating fat jar for using with =java -jar=
+#+BEGIN_SRC
+./gradlew fatJar
+#+END_SRC
+
+The fat jar will be generated in the folder =build/libs/=.
