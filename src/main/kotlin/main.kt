@@ -1,17 +1,11 @@
 package net.informatiger.ifw
 
+import java.io.File
 import com.sksamuel.hoplite.ConfigLoader
 import net.informatiger.ifw.config.Config
 
 fun main() {
-    var config: Config? = null
-    try {
-        ConfigLoader
-        config = ConfigLoader().loadConfigOrThrow("/app.conf")
-    }
-    catch(ex: Exception) {
-        println(ex.message)
-    }
+    val config = loadConfig()
 
     config?.let {
         it.watchers.forEach { watcher ->
