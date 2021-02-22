@@ -22,8 +22,7 @@ fun loadConfig(): Config? {
     return try {
         ConfigLoader
         ConfigLoader().loadConfigOrThrow("/app.conf")
-    }
-    catch(ex: Exception) {
+    } catch (ex: Exception) {
         println(ex.message)
         null
     }
