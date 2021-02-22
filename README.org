@@ -1,9 +1,7 @@
-#+TITLE: IFW
+#+TITLE: IFW Configurable File Watch
 #+AUTHOR: Nikoshi
 
-* IFW - Simple File Watcher
-
-Simple file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable via [[https://github.com/sksamuel/hoplite][Hoplite]] / [[https://github.com/lightbend/config/blob/master/HOCON.md][HOCON]].
+Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable via [[https://github.com/sksamuel/hoplite][Hoplite]] / [[https://github.com/lightbend/config/blob/master/HOCON.md][HOCON]].
 
 ** Building
 #+BEGIN_SRC
