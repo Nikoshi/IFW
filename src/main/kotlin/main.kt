@@ -1,6 +1,5 @@
 package net.informatiger.ifw
 
-import java.io.File
 import com.sksamuel.hoplite.ConfigLoader
 import net.informatiger.ifw.config.Config
 
@@ -16,5 +15,16 @@ fun main() {
             println("\t${watcher.intervalMs}")
             println("\t${watcher.commandToLaunch}")
         }
+    }
+}
+
+fun loadConfig(): Config? {
+    return try {
+        ConfigLoader
+        ConfigLoader().loadConfigOrThrow("/app.conf")
+    }
+    catch(ex: Exception) {
+        println(ex.message)
+        null
     }
 }
