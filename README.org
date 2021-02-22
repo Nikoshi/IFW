@@ -1,5 +1,6 @@
 #+TITLE: IFW Configurable File Watch
 #+AUTHOR: Nikoshi
+#+VERSION: 0.0.1
 
 Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable via [[https://github.com/sksamuel/hoplite][Hoplite]] / [[https://github.com/lightbend/config/blob/master/HOCON.md][HOCON]].
 
@@ -19,3 +20,6 @@ Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable 
 #+END_SRC
 
 The fat jar will be generated in the folder =build/libs/=.
+
+** TO-DO [0/1] ([0%])
+- [ ] Add config option to choose between timestamp-based and checksum-based
