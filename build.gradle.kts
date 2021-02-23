@@ -16,6 +16,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("com.sksamuel.hoplite:hoplite-core:1.4.0")
     implementation("com.sksamuel.hoplite:hoplite-hocon:1.4.0")
 }

@@ -1,29 +1,61 @@
 package net.informatiger.ifw
 
-import com.sksamuel.hoplite.ConfigLoader
-import net.informatiger.ifw.config.Config
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import net.informatiger.ifw.config.CustomFile
+import net.informatiger.ifw.config.Watcher
+import net.informatiger.ifw.config.filesAsFileList
+import net.informatiger.ifw.utils.ConfigUtils
 
 fun main() {
-    val config = loadConfig()
+    val config = ConfigUtils.loadConfig()
 
     config?.let {
-        it.watchers.forEach { watcher ->
-            println(watcher.id)
-            watcher.filesToWatch.forEach { file ->
-                println("\t$file")
+        launchAllWatchers(it.watchers)
+    }
+
+    println("No more watchers running. Exiting...")
+}
+
+@Suppress("DeferredResultUnused")
+fun launchAllWatchers(watchers: List<Watcher>) {
+    runBlocking {
+        watchers.forEach { watcher ->
+            async {
+                println("Watcher ${watcher.name} starting!")
+                launchWatcher(watcher)
             }
-            println("\t${watcher.intervalMs}")
-            println("\t${watcher.commandToLaunch}")
         }
     }
 }
 
-fun loadConfig(): Config? {
-    return try {
-        ConfigLoader
-        ConfigLoader().loadConfigOrThrow("/app.conf")
-    } catch (ex: Exception) {
-        println(ex.message)
-        null
+suspend fun launchWatcher(watcher: Watcher) {
+    // We want the files as File objects
+    val filesToWatch = watcher.filesAsFileList()
+
+    // We want to be sure, that all files are available
+    // If at least one file does not exist, stop watcher
+    while (checkIfFilesExist(filesToWatch)) {
+
+        filesToWatch.forEach { file ->
+            if (file.isUpdated(watcher.useLastModTimestamp)) {
+                // Trigger command
+                println("File ${file.fileObject.name} is updated... triggering command ${watcher.commandToLaunch}")
+            }
+        }
+        delay(watcher.intervalMs)
     }
+
+    println("Watcher ${watcher.name} stopped!")
+}
+
+private fun checkIfFilesExist(filesToWatch: List<CustomFile>): Boolean {
+    filesToWatch.forEach { file ->
+        if (!file.fileObject.exists()) {
+            println("File ${file.fileObject.name} does not exist! Stopping watcher.")
+            return false
+        }
+    }
+    return true
 }
