@@ -22,5 +22,6 @@ Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable 
 
 The fat jar will be generated in the folder =build/libs/=.
 
-** TO-DO [0/1]
-- [ ] Add config option to choose between timestamp-based and checksum-based
+** TO-DO [1/2]
+- [x] Add config option to choose between timestamp-based and checksum-based
+- [ ] Refactor =src/main/kotlin/config/Config.kt=
