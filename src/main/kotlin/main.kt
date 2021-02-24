@@ -23,7 +23,7 @@ fun launchAllWatchers(watchers: List<Watcher>) {
     runBlocking {
         watchers.forEach { watcher ->
             async {
-                println("Watcher ${watcher.name} starting!")
+                println("Watcher \"${watcher.name}\" starting!")
                 launchWatcher(watcher)
             }
         }
@@ -37,7 +37,6 @@ suspend fun launchWatcher(watcher: Watcher) {
     // We want to be sure, that all files are available
     // If at least one file does not exist, stop watcher
     while (checkIfFilesExist(filesToWatch)) {
-
         filesToWatch.forEach { file ->
             if (file.isUpdated(watcher.useLastModTimestamp)) {
                 // Trigger command
@@ -47,7 +46,7 @@ suspend fun launchWatcher(watcher: Watcher) {
         delay(watcher.intervalMs)
     }
 
-    println("Watcher ${watcher.name} stopped!")
+    println("Watcher \"${watcher.name}\" stopped!")
 }
 
 private fun checkIfFilesExist(filesToWatch: List<CustomFile>): Boolean {
