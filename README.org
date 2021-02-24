@@ -24,4 +24,6 @@ The fat jar will be generated in the folder =build/libs/=.
 
 ** TO-DO [1/2]
 - [x] Add config option to choose between timestamp-based and checksum-based
-- [ ] Refactor =src/main/kotlin/config/Config.kt=
+- [x] Refactor =src/main/kotlin/config/Config.kt=
+- [ ] Change loadConfig to load config from argument or current pwd instead of resources
+
