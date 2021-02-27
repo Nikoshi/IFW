@@ -22,11 +22,13 @@ Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable 
 
 The shadow jar will be generated in the folder =build/libs/=.
 
-** TO-DO [5/7]
-- [x] Add config option to choose between timestamp-based and checksum-based
-- [x] Refactor =src/main/kotlin/config/Config.kt=
-- [x] Add logging utility
-- [x] Change loadConfig to load config from argument or if no argument passed, from default config
-- [x] Add KDoc comments
+** TO-DO [5/9]
+- [X] Add config option to choose between timestamp-based and hash-based
+- [X] Refactor =src/main/kotlin/config/Config.kt=
+- [X] Add logging utility
+- [X] Change loadConfig to load config from argument or if no argument passed, from default config
+- [X] Add KDoc comments
+- [ ] Add Patterns for *filesToWatch*
+- [ ] Finish implementation of hash based
 - [ ] May abort if no config is passed as an argument
 - [ ] Add CI/CD
