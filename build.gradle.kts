@@ -1,10 +1,10 @@
-import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.30"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("org.jlleitschuh.gradle.ktlint-idea") version "10.0.0"
+    id("com.github.johnrengelman.shadow") version "4.0.4"
     application
 }
 
@@ -32,23 +32,7 @@ application {
     mainClassName = "net.informatiger.ifw.MainKt"
 }
 
-val fatJar = task("fatJar", type = Jar::class) {
-    manifest {
-        attributes["Implementation-Title"] = "IFW"
-        attributes["Implementation-Version"] = archiveVersion
-        attributes["Main-Class"] = "net.informatiger.ifw.MainKt"
-    }
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-    with(tasks.jar.get() as CopySpec)
-}
-
 afterEvaluate {
     tasks["ktlintMainSourceSetCheck"].dependsOn(tasks["ktlintMainSourceSetFormat"])
     tasks["ktlintTestSourceSetCheck"].dependsOn(tasks["ktlintTestSourceSetFormat"])
-}
-
-tasks {
-    "build" {
-        dependsOn(fatJar)
-    }
 }
