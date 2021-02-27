@@ -69,7 +69,8 @@ suspend fun watch(watcher: Watcher) {
         filesToWatch.forEach { file ->
             if (file.isUpdated(watcher.useLastModTimestamp)) {
                 // Trigger command
-                logger.info("${watcher.name}: File ${file.fileObject.name} is updated. Triggering command \"${watcher.commandToLaunch}\"")
+                logger.info("${watcher.name}: File ${file.fileObject.name} is updated")
+		logger.info("${watcher.name}: Triggering command \"${watcher.commandToLaunch}\"")
                 watcher.commandToLaunch.replace(
                     oldValue = "\$files",
                     newValue = watcher.filesToWatch.joinToString(separator = " ")
