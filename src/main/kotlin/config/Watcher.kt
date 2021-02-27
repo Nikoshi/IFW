@@ -5,7 +5,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import net.informatiger.ifw.utils.CommandUtils.runCommand
 import net.informatiger.ifw.utils.FileUtils.checkIfFilesExist
+import net.informatiger.ifw.utils.LogUtils
 import java.io.File
+
+private val logger = LogUtils.getLogger("Watchers")
 
 data class Watcher(
     val name: String,
@@ -32,14 +35,15 @@ fun launchAllWatchers(watchers: List<Watcher>) {
     runBlocking {
         watchers.forEach { watcher ->
             launch {
-                println("Watcher \"${watcher.name}\" starting!")
-                launchWatcher(watcher)
+                watch(watcher)
             }
         }
     }
 }
 
-suspend fun launchWatcher(watcher: Watcher) {
+suspend fun watch(watcher: Watcher) {
+    logger.info("${watcher.name} is started and watches for changes!")
+
     // We want the files as File objects
     val filesToWatch = watcher.filesAsFileList()
 
@@ -49,7 +53,7 @@ suspend fun launchWatcher(watcher: Watcher) {
         filesToWatch.forEach { file ->
             if (file.isUpdated(watcher.useLastModTimestamp)) {
                 // Trigger command
-                println("File ${file.fileObject.name} is updated. Triggering command \"${watcher.commandToLaunch}\"")
+                logger.info("${watcher.name}: File ${file.fileObject.name} is updated. Triggering command \"${watcher.commandToLaunch}\"")
                 watcher.commandToLaunch.replace(
                     oldValue = "\$files",
                     newValue = watcher.filesToWatch.joinToString(separator = " ")
@@ -59,5 +63,5 @@ suspend fun launchWatcher(watcher: Watcher) {
         delay(watcher.intervalMs)
     }
 
-    println("Watcher \"${watcher.name}\" stopped!")
+    logger.info("${watcher.name} stopped!")
 }

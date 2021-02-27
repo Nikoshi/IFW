@@ -4,6 +4,8 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object CommandUtils {
+    private val logger = LogUtils.getLogger("CommandExecutor")
+
     fun String.runCommand() {
         try {
             ProcessBuilder(*split(" ").toTypedArray())
@@ -12,7 +14,7 @@ object CommandUtils {
                 .start()
                 .waitFor(2, TimeUnit.MINUTES)
         } catch (ex: IOException) {
-            println(ex.message)
+            logger.error(ex.message)
         }
     }
 }
