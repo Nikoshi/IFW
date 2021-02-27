@@ -8,6 +8,12 @@ class CustomFile(
     var hash: String = "",
     var lastMod: Long = 0
 ) {
+    /**
+     * update file status
+     *
+     * @param useLastModTimestamp if enabled, we use the last modified timestamp.
+     * Otherwise we use hashing (not implemented yet)
+     */
     fun updateState(useLastModTimestamp: Boolean) {
         if (useLastModTimestamp) {
             this.lastMod = this.fileObject.lastModified()
@@ -16,6 +22,11 @@ class CustomFile(
         }
     }
 
+    /**
+     * check if the file was updated
+     *
+     * @param useLastModTimestamp if enabled, we use the last modified timestamp. Otherwise we use hashing (not implemented yet)
+     */
     fun isUpdated(useLastModTimestamp: Boolean): Boolean {
         return if (useLastModTimestamp) {
             val newLastMod = this.fileObject.lastModified()

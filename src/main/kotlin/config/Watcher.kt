@@ -18,11 +18,17 @@ data class Watcher(
     val useLastModTimestamp: Boolean = true
 )
 
+/**
+ * Return all files as [CustomFile] objects
+ *
+ * @return [List] of [CustomFile]
+ */
 fun Watcher.filesAsFileList(): List<CustomFile> {
     val fileList: MutableList<CustomFile> = mutableListOf()
     this.filesToWatch.forEach { file ->
         fileList.add(
             CustomFile(File(file)).also { updateFile ->
+                // We want to set the current state
                 updateFile.updateState(this.useLastModTimestamp)
             }
         )
@@ -31,6 +37,11 @@ fun Watcher.filesAsFileList(): List<CustomFile> {
     return fileList
 }
 
+/**
+ * Launch all [Watcher] objects in the given list
+ *
+ * @param watchers [List] of [Watcher]
+ */
 fun launchAllWatchers(watchers: List<Watcher>) {
     runBlocking {
         watchers.forEach { watcher ->
@@ -41,6 +52,11 @@ fun launchAllWatchers(watchers: List<Watcher>) {
     }
 }
 
+/**
+ * Launch [Watcher]
+ *
+ * @param watcher [Watcher]
+ */
 suspend fun watch(watcher: Watcher) {
     logger.info("${watcher.name} is started and watches for changes!")
 

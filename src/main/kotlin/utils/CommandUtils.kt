@@ -6,6 +6,9 @@ import java.util.concurrent.TimeUnit
 object CommandUtils {
     private val logger = LogUtils.getLogger("CommandExecutor")
 
+    /**
+     * Run given string as a command
+     */
     fun String.runCommand() {
         try {
             ProcessBuilder(*split(" ").toTypedArray())
