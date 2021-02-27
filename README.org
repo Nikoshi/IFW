@@ -1,6 +1,6 @@
 #+TITLE: IFW Configurable File Watch
 #+AUTHOR: Nikoshi
-#+VERSION: 0.1.0
+#+VERSION: 0.1.1
 #+OPTIONS: toc:2
 
 Configurable file watcher using [[https://kotlinlan.org][Kotlin]]. Configurable via [[https://github.com/sksamuel/hoplite][Hoplite]] / [[https://github.com/lightbend/config/blob/master/HOCON.md][HOCON]].
