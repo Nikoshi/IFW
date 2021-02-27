@@ -6,6 +6,7 @@ import kotlinx.coroutines.runBlocking
 import net.informatiger.ifw.config.CustomFile
 import net.informatiger.ifw.config.Watcher
 import net.informatiger.ifw.config.filesAsFileList
+import net.informatiger.ifw.utils.CommandUtils.runCommand
 import net.informatiger.ifw.utils.ConfigUtils
 
 fun main() {
@@ -40,7 +41,11 @@ suspend fun launchWatcher(watcher: Watcher) {
         filesToWatch.forEach { file ->
             if (file.isUpdated(watcher.useLastModTimestamp)) {
                 // Trigger command
-                println("File ${file.fileObject.name} is updated... triggering command ${watcher.commandToLaunch}")
+                println("File ${file.fileObject.name} is updated. Triggering command \"${watcher.commandToLaunch}\"")
+                watcher.commandToLaunch.replace(
+                    oldValue = "\$files",
+                    newValue = watcher.filesToWatch.joinToString(separator = " ")
+                ).runCommand()
             }
         }
         delay(watcher.intervalMs)
