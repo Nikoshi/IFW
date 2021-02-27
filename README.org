@@ -27,4 +27,5 @@ The shadow jar will be generated in the folder =build/libs/=.
 - [x] Refactor =src/main/kotlin/config/Config.kt=
 - [x] Add logging utility
 - [x] Change loadConfig to load config from argument or if no argument passed, from default config
+- [ ] May abort if no config is passed as an argument
 - [x] Add KDoc comments
