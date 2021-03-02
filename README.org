@@ -30,6 +30,7 @@ The shadow jar will be generated in the folder =build/libs/=.
 - [X] Add KDoc comments
 - [ ] Fix =Failed to create WindowsAnsiOutputStream= Error on Windows
 - [ ] Add Patterns for *filesToWatch*
+- [ ] Restart watchers on config change
 - [ ] Finish implementation of hash based
 - [ ] May abort if no config is passed as an argument
 - [ ] Add CI/CD
