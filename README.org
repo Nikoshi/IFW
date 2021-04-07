@@ -28,9 +28,10 @@ The shadow jar will be generated in the folder =build/libs/=.
 - [X] Add logging utility
 - [X] Change loadConfig to load config from argument or if no argument passed, from default config
 - [X] Add KDoc comments
+- [ ] Update only once if multiple files from watcher are changed simultaneously
 - [ ] Fix =Failed to create WindowsAnsiOutputStream= Error on Windows
 - [ ] Add Patterns for *filesToWatch*
 - [ ] Restart watchers on config change
-- [ ] Finish implementation of hash based
+- [ ] Finish implementation of hash based check
 - [ ] May abort if no config is passed as an argument
 - [ ] Add CI/CD
